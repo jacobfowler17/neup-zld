@@ -4,10 +4,10 @@ import numpy as np
 import os
 import csv
 import glob
-from keith_thesis import *
-from zld_dynamic import build_model
+from src.core.zld_dynamic import build_model
+# from zld_dynamic import build_model
 
-
+wd = "src/core/"
 
 def run_1d_sensitivity():
     
@@ -16,10 +16,10 @@ def run_1d_sensitivity():
     N_dispatch  = 8760
 
     # Load Data
-    eff_design    = pd.read_csv("avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
-    elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-    eff_dispatch  = pd.read_csv("year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
-    elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+    eff_design    = pd.read_csv(wd + "avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
+    elec_design   = pd.read_csv(wd + "avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+    eff_dispatch  = pd.read_csv(wd + "year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
+    elec_dispatch = pd.read_csv(wd + "year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
     solver = pyo.SolverFactory("gurobi")
     solver.options['NonConvex'] = 2
@@ -61,7 +61,7 @@ def run_1d_sensitivity():
 
         # design phase
         model_d = build_model(N_design, elec_design, eff_design, price_mults=current_prices)
-        solver.solve(model_d, tee=False)
+        solver.solve(model_d, tee=True)
 
 
         # extract sizing
