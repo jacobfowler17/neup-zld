@@ -1,6 +1,8 @@
 ## Custom file and folder ignores:
 .git
 
+# Results folders
+dispatch_plots/
 
 
 

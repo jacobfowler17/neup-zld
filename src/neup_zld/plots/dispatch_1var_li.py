@@ -3,10 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+sweeps_dir = "src/neup_zld/sweeps/sweep_1var_lithium/"
+
 FILES = {
-    "Li = 1x $/kg": "dispatch_Li_1.0.csv",
-    "Li = 5x $/kg": "dispatch_Li_5.0.csv",
-    "Li = 10x $/kg": "dispatch_Li_10.0.csv",
+    "Li = 0.25x $/kg": sweeps_dir + "dispatch_lithium_0.25.csv",
+    "Li = 0.5x $/kg" : sweeps_dir + "dispatch_lithium_0.5.csv",
+    "Li = 1x $/kg"   : sweeps_dir + "dispatch_lithium_1.0.csv",
+    "Li = 2.5x $/kg" : sweeps_dir + "dispatch_lithium_2.5.csv",
+    "Li = 5x $/kg"   : sweeps_dir + "dispatch_lithium_5.0.csv",
+    "Li = 7.5x $/kg" : sweeps_dir + "dispatch_lithium_7.5.csv",
+    "Li = 10x $/kg"  : sweeps_dir + "dispatch_lithium_10.0.csv",
+    "Li = 20x $/kg"  : sweeps_dir + "dispatch_lithium_20.0.csv",
 }
 
 OUTPUT_DIR = Path("dispatch_plots")
@@ -72,6 +79,7 @@ def plot_rep_week(metric, ylabel, season, outname):
 
     plt.title(f"{season.capitalize()} Representative Week — {ylabel}")
     plt.xlabel("Hour of Week")
+    plt.xticks([0,24,48,72,96,120,144,168])
     plt.ylabel(ylabel)
     plt.grid(alpha=0.3)
     plt.legend()
@@ -84,12 +92,12 @@ def plot_rep_week(metric, ylabel, season, outname):
 # ================================
 # MAIN
 # ================================
-plot_rep_week(
-    metric="cold_tes_kg",
-    ylabel="Cold TES Inventory (kg)",
-    season="winter",
-    outname="winter_cold_tes.png",
-)
+# plot_rep_week(
+#     metric="cold_tes_kg",
+#     ylabel="Cold TES Inventory (kg)",
+#     season="winter",
+#     outname="winter_cold_tes.png",
+# )
 
 plot_rep_week(
     metric="elec_sold_kWe",
@@ -98,12 +106,12 @@ plot_rep_week(
     outname="winter_electricity.png",
 )
 
-plot_rep_week(
-    metric="cold_tes_kg",
-    ylabel="Cold TES Inventory (kg)",
-    season="summer",
-    outname="summer_cold_tes.png",
-)
+# plot_rep_week(
+#     metric="cold_tes_kg",
+#     ylabel="Cold TES Inventory (kg)",
+#     season="summer",
+#     outname="summer_cold_tes.png",
+# )
 
 plot_rep_week(
     metric="elec_sold_kWe",

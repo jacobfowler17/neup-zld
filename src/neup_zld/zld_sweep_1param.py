@@ -4,10 +4,10 @@ import numpy as np
 import os
 import csv
 import glob
-from src.core.zld_dynamic import build_model
-# from zld_dynamic import build_model
+# from src.neup_zld.zld_dynamic import build_model
+from zld_dynamic import build_model
 
-wd = "src/core/"
+wd = "src/neup_zld/"
 
 def run_1d_sensitivity():
     
@@ -47,7 +47,7 @@ def run_1d_sensitivity():
 )
 
     
-    results_dir = os.path.join("sweeps", f"sweep_1var_{sweep_name}")
+    results_dir = os.path.join(wd + "sweeps", f"sweep_1var_{sweep_name}")
     os.makedirs(results_dir, exist_ok=True)
     
     # 
