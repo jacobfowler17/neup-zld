@@ -16,4 +16,4 @@ request_cpus = 1
 request_memory = 8GB
 request_disk = 8GB
 
-queue NUM_PARAMS SPECIES
+queue NUM_PARAMS SPECIES from arguments.txt
