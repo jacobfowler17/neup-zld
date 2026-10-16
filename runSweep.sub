@@ -4,16 +4,18 @@
 container_image = docker://jfowler5/neup-zld:alpha-test
 universe = container
 
-executable            = run.sh
+executable = run.sh
+arguments  = $(NUM_PARAMS) $(SPECIES)
+
 transfer_input_files  = src/
 transfer_output_files = results/sweep_$(SPECIES)_$(NUM_PARAMS)/
 
-log = logs/sweep_$(SPECIES)_$(NUM_PARAMS).log
-error = errors/sweep_$(SPECIES)_$(NUM_PARAMS).err
+log    = logs/sweep_$(SPECIES)_$(NUM_PARAMS).log
+error  = errors/sweep_$(SPECIES)_$(NUM_PARAMS).err
 output = outputs/sweep_$(SPECIES)_$(NUM_PARAMS).out
 
-request_cpus = 1
+request_cpus   = 6
 request_memory = 8GB
-request_disk = 8GB
+request_disk   = 8GB
 
 queue NUM_PARAMS SPECIES from arguments.txt
