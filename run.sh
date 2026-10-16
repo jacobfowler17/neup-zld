@@ -1,2 +1,2 @@
 #!/bin/bash
-python src/neup_zld/main.py
+python src/neup_zld/main.py 1 Li
