@@ -5,7 +5,7 @@ import os
 import csv
 import glob
 # from zld_model import build_model
-from neup_zld.core.zld_dynamic import build_model
+from core.zld_dynamic import build_model
 
 
 

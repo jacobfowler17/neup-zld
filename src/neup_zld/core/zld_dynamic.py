@@ -10,7 +10,7 @@ def build_model(N, Schedule_elec, Schedule_effic, price_mults=None, cost_mults=N
     process_mults = process_mults or {}
     
 
-    from neup_zld.core.zld_params import (
+    from core.zld_params import (
         add_sets,
         add_time_set,
         add_time_series_params,

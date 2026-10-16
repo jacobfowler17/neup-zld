@@ -5,7 +5,7 @@ import os
 import sys
 import csv
 import glob
-from neup_zld.core.zld_dynamic import build_model
+from core.zld_dynamic import build_model
 
 wd = sys.path[0]
 
