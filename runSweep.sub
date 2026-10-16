@@ -1,0 +1,19 @@
+# HTC Submit File
+
+# Provide HTCondor with the name of the Docker container
+container_image = docker://jfowler5/neup-zld:alpha-test
+universe = container
+
+executable            = run.sh
+transfer_input_files  = src/neup_zld/
+transfer_output_files = results/sweep_$(SPECIES)_$(NUM_PARAMS)/
+
+log = logs/sweep_$(SPECIES)_$(NUM_PARAMS).log
+error = errors/sweep_$(SPECIES)_$(NUM_PARAMS).err
+output = outputs/sweep_$(SPECIES)_$(NUM_PARAMS).out
+
+request_cpus = 1
+request_memory = 8GB
+request_disk = 8GB
+
+queue NUM_PARAMS SPECIES
