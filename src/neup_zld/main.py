@@ -17,8 +17,8 @@ def run_sweep(num_params: int, species: list = ["Li"], verbose: bool = False):
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Run the optimization.")
-    p.add_argument("num_params", help="How many parameters to run a sweep over")
-    p.add_argument("species", type=list, default=["Li"], help="which mineral species will be included in the simulation")
+    p.add_argument("num_params", type=int, help="How many parameters to run a sweep over")
+    p.add_argument("species", nargs="+", help="which mineral species will be included in the simulation")
     p.add_argument("-v", "--verbose", action="store_true", help="Stream solver log")
     return p.parse_args(argv)
 
