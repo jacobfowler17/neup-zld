@@ -1,6 +1,6 @@
 import pyomo.environ as pyo
 
-from zld_power_cycle_calcs import compute_power_cycle_nominals
+from neup_zld.core.zld_power_cycle_calcs import compute_power_cycle_nominals
 
   
     

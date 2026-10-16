@@ -1,7 +1,6 @@
 import pyomo.environ as pyo
 
 
-
 def build_model(N, Schedule_elec, Schedule_effic, price_mults=None, cost_mults=None, process_mults=None, turbine_mults=1.0):
     
     
@@ -11,7 +10,7 @@ def build_model(N, Schedule_elec, Schedule_effic, price_mults=None, cost_mults=N
     process_mults = process_mults or {}
     
 
-    from zld_params import (
+    from neup_zld.core.zld_params import (
         add_sets,
         add_time_set,
         add_time_series_params,

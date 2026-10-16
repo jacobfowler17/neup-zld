@@ -3,7 +3,7 @@ import pandas as pd
 import pyomo.environ as pyo
 import csv
 import os
-from zld_dynamic import build_model
+from neup_zld.core.zld_dynamic import build_model
 
 # write csv dispatch results
 def write_dispatch_csv(model_disp, hourly_filename):
