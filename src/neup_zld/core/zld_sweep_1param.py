@@ -4,22 +4,18 @@ import numpy as np
 import os
 import csv
 import glob
-# from src.neup_zld.zld_dynamic import build_model
-from zld_dynamic import build_model
-
-wd = "src/neup_zld/"
+from neup_zld.core.zld_dynamic import build_model
 
 def run_1d_sensitivity():
-    
     
     N_design    = 24
     N_dispatch  = 8760
 
     # Load Data
-    eff_design    = pd.read_csv(wd + "avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
-    elec_design   = pd.read_csv(wd + "avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-    eff_dispatch  = pd.read_csv(wd + "year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
-    elec_dispatch = pd.read_csv(wd + "year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+    eff_design    = pd.read_csv("avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
+    elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+    eff_dispatch  = pd.read_csv("year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
+    elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
     solver = pyo.SolverFactory("gurobi")
     solver.options['NonConvex'] = 2
@@ -47,7 +43,7 @@ def run_1d_sensitivity():
 )
 
     
-    results_dir = os.path.join(wd + "sweeps", f"sweep_1var_{sweep_name}")
+    results_dir = os.path.join("sweeps", f"sweep_1var_{sweep_name}")
     os.makedirs(results_dir, exist_ok=True)
     
     # 

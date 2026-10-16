@@ -4,7 +4,9 @@ import numpy as np
 import os
 import csv
 import glob
-from zld_model import build_model
+# from zld_model import build_model
+from neup_zld.core.zld_dynamic import build_model
+
 
 
 def run_2d_sensitivity():

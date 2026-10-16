@@ -95,4 +95,3 @@ def run_2d_sensitivity():
 
 if __name__ == "__main__":
     run_2d_sensitivity()
-    
