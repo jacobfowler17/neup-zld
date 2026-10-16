@@ -1,7 +1,7 @@
 import argparse
 
-from neup_zld.core.zld_sweep_1param import run_1d_sensitivity
-from neup_zld.core.zld_sweep_2param import run_2d_sensitivity
+from core.zld_sweep_1param import run_1d_sensitivity
+from core.zld_sweep_2param import run_2d_sensitivity
 # from neup_zld.core.zld_sweep_3param import run_3d_sensitivity  # I don't think this code works right now, only has a function named "run_2d_sensitivity"
 
 
