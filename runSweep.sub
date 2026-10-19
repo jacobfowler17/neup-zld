@@ -8,7 +8,7 @@ executable = run.sh
 arguments  = $(NUM_PARAMS) $(SPECIES)
 
 transfer_input_files  = src/
-transfer_output_files = src/neup_zld/results/sweep_$(SPECIES)_$(NUM_PARAMS)var/
+transfer_output_files = neup_zld/results/sweep_$(SPECIES)_$(NUM_PARAMS)var/
 
 log    = logs/sweep_$(SPECIES)_$(NUM_PARAMS)var.log
 error  = errors/sweep_$(SPECIES)_$(NUM_PARAMS)var.err
