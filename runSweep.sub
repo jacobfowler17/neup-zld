@@ -8,11 +8,11 @@ executable = run.sh
 arguments  = $(NUM_PARAMS) $(SPECIES)
 
 transfer_input_files  = src/
-transfer_output_files = results/sweep_$(SPECIES)_$(NUM_PARAMS)/
+transfer_output_files = src/neup_zld/sweeps/sweep_$(SPECIES)_$(NUM_PARAMS)var/
 
-log    = logs/sweep_$(SPECIES)_$(NUM_PARAMS).log
-error  = errors/sweep_$(SPECIES)_$(NUM_PARAMS).err
-output = outputs/sweep_$(SPECIES)_$(NUM_PARAMS).out
+log    = logs/sweep_$(SPECIES)_$(NUM_PARAMS)var.log
+error  = errors/sweep_$(SPECIES)_$(NUM_PARAMS)var.err
+output = outputs/sweep_$(SPECIES)_$(NUM_PARAMS)var.out
 
 request_cpus   = 6
 request_memory = 8GB

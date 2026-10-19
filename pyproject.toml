@@ -6,9 +6,9 @@ build-backend = "uv_build"
 name = "neup-zld"
 version = "0.0.0"
 authors = [
-  { name="Mike Wagner", email="mjwagner2@wisc.edu" },
   { name="Elizabeth Keith", email="elizabeth.keith@wisc.edu"},
-  { name="Jacob Fowler", email="jfowler5@wisc.edu"}
+  { name="Jacob Fowler", email="jfowler5@wisc.edu"},
+  { name="Mike Wagner", email="mjwagner2@wisc.edu" }
 ]
 description = "NEUP Zero-Liquid Discharge Optimization Model"
 readme = "README.md"
