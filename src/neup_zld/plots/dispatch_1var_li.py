@@ -3,17 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-sweeps_dir = "src/neup_zld/sweeps/sweep_1var_lithium/"
+results_dir = "src/neup_zld/results/sweep_1var_Li/"
 
 FILES = {
-    "Li = 0.25x $/kg": sweeps_dir + "dispatch_lithium_0.25.csv",
-    "Li = 0.5x $/kg" : sweeps_dir + "dispatch_lithium_0.5.csv",
-    "Li = 1x $/kg"   : sweeps_dir + "dispatch_lithium_1.0.csv",
-    "Li = 2.5x $/kg" : sweeps_dir + "dispatch_lithium_2.5.csv",
-    "Li = 5x $/kg"   : sweeps_dir + "dispatch_lithium_5.0.csv",
-    "Li = 7.5x $/kg" : sweeps_dir + "dispatch_lithium_7.5.csv",
-    "Li = 10x $/kg"  : sweeps_dir + "dispatch_lithium_10.0.csv",
-    "Li = 20x $/kg"  : sweeps_dir + "dispatch_lithium_20.0.csv",
+    "Li = 0.25x $/kg": results_dir + "dispatch_Li_0.25.csv",
+    "Li = 0.5x $/kg" : results_dir + "dispatch_Li_0.5.csv",
+    "Li = 1x $/kg"   : results_dir + "dispatch_Li_1.0.csv",
+    "Li = 2.5x $/kg" : results_dir + "dispatch_Li_2.5.csv",
+    "Li = 5x $/kg"   : results_dir + "dispatch_Li_5.0.csv",
+    "Li = 7.5x $/kg" : results_dir + "dispatch_Li_7.5.csv",
+    "Li = 10x $/kg"  : results_dir + "dispatch_Li_10.0.csv",
+    "Li = 20x $/kg"  : results_dir + "dispatch_Li_20.0.csv",
 }
 
 OUTPUT_DIR = Path("dispatch_plots")
