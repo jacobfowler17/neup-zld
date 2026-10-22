@@ -2,12 +2,13 @@ import pyomo.environ as pyo
 import pandas as pd
 import numpy as np
 import os
+import sys
 import csv
 import glob
 # from zld_model import build_model
 from core.zld_dynamic import build_model
 
-
+wd = sys.path[0]
 
 def run_2d_sensitivity():
 
@@ -15,8 +16,8 @@ def run_2d_sensitivity():
     N_dispatch = 8760
 
     # fixed efficiency data
-    eff_design   = pd.read_csv("avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
-    eff_dispatch = pd.read_csv("year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
+    eff_design   = pd.read_csv(wd + "/core/avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
+    eff_dispatch = pd.read_csv(wd + "/core/year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
 
     solver = pyo.SolverFactory("gurobi")
     solver.options["NonConvex"] = 2
@@ -60,8 +61,8 @@ def run_2d_sensitivity():
 
     if sweep_mode == "param_x_param":
 
-        elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-        elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+        elec_design   = pd.read_csv(wd + "/core/avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+        elec_dispatch = pd.read_csv(wd + "/core/year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
         for val1 in sweep_values_1:
             for val2 in sweep_values_2:
