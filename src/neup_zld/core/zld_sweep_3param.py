@@ -6,14 +6,15 @@ import glob
 # from zld_model import build_model
 from core.zld_dynamic import build_model
 
+wd = sys.path[0]
 
-def run_2d_sensitivity():
+def run_2d_sensitivity(sweep_param: list, verbose=False):
 
     N_design   = 24
     N_dispatch = 8760
 
-    eff_design   = pd.read_csv("avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
-    eff_dispatch = pd.read_csv("year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
+    eff_design   = pd.read_csv(wd + "/core/avg_day_efficiency.csv")["Average_Efficiency"].to_numpy()[:N_design]
+    eff_dispatch = pd.read_csv(wd + "/core/year_efficiency.csv")["Efficiency"].to_numpy()[:N_dispatch]
 
     solver = pyo.SolverFactory("gurobi")
     solver.options["NonConvex"] = 2
@@ -128,7 +129,7 @@ def run_2d_sensitivity():
             process_mults=current_process,
             turbine_mults=turbine_scale)
 
-        res_d = solver.solve(model_d, tee=False)
+        res_d = solver.solve(model_d, tee=verbose)
 
         if res_d.solver.termination_condition != pyo.TerminationCondition.optimal:
             print(f"Design model failed for {case_label}")
@@ -160,7 +161,7 @@ def run_2d_sensitivity():
         model_disp.m_hot_tes_max.fix(hot_max)
         model_disp.m_cold_tes_max.fix(cold_max)
 
-        res_disp = solver.solve(model_disp, tee=False)
+        res_disp = solver.solve(model_disp, tee=verbose)
 
         if res_disp.solver.termination_condition != pyo.TerminationCondition.optimal:
             print(f"Dispatch model failed for {case_label}")
@@ -210,8 +211,8 @@ def run_2d_sensitivity():
 
     elif sweep_mode == "price_x_process":
 
-        elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-        elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+        elec_design   = pd.read_csv(wd + "/core/avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+        elec_dispatch = pd.read_csv(wd + "/core/year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
         for val1 in sweep_values_1:
             for pval in process_values_1:
@@ -239,8 +240,8 @@ def run_2d_sensitivity():
 
     elif sweep_mode == "process_x_process":
 
-        elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-        elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+        elec_design   = pd.read_csv(wd + "/core/avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+        elec_dispatch = pd.read_csv(wd + "/core/year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
         for val1 in process_values_1:
             for val2 in process_values_2:
@@ -306,8 +307,8 @@ def run_2d_sensitivity():
 
     elif sweep_mode == "price_x_cost":
 
-        elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-        elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+        elec_design   = pd.read_csv(wd + "/core/avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+        elec_dispatch = pd.read_csv(wd + "/core/year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
         for val1 in sweep_values_1:
             for cval in cost_values_1:
@@ -335,8 +336,8 @@ def run_2d_sensitivity():
 
     elif sweep_mode == "cost_x_cost":
 
-        elec_design   = pd.read_csv("avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
-        elec_dispatch = pd.read_csv("year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
+        elec_design   = pd.read_csv(wd + "/core/avg_day_lmp.csv")["LMP"].to_numpy()[:N_design]
+        elec_dispatch = pd.read_csv(wd + "/core/year_lmp.csv")["LMP"].to_numpy()[:N_dispatch]
 
         for val1 in cost_values_1:
             for val2 in cost_values_2:

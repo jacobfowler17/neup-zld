@@ -9,7 +9,7 @@ from core.zld_dynamic import build_model
 
 wd = sys.path[0]
 
-def run_1d_sensitivity():
+def run_1d_sensitivity(sweep_param, verbose):
     
     N_design    = 24
     N_dispatch  = 8760
@@ -25,19 +25,30 @@ def run_1d_sensitivity():
 
 
     # define sweep ranges
+    if len(sweep_param) > 1 or len(sweep_param) == 0 or sweep_param is None
+        raise ValueError("Invalid number of entries for variable 'sweep_param': Must be equal to 1 for a 1-parameter sweep")
+
+    # NOTE: I should instead just make it so I either:
+    #     1. Enter a "case" number that loads a standard set of arguments from a cases.json file
+    #     2. Enter the sweep_param and sweep_values as a keyword/value pair and pass 'sweep_params' as a dictionary
+
     # sweep lithium price multiplier
-    sweep_name     = 'lithium'
-    sweep_values   = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
-    
+    elif sweep_param == 'lithium':
+        sweep_name     = 'lithium'
+        sweep_values   = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
     
     # sweep water price multiplier
-    # sweep_name   = 'water'
-    # sweep_values = [0.25, 0.5, 1.0, 1.5, 2.0, 5.0]
-    
+    elif sweep_param == 'water':
+        sweep_name   = 'water'
+        sweep_values = [0.25, 0.5, 1.0, 1.5, 2.0, 5.0]
     
     # sweep cold tes cost multiplier
-    # sweep_name   = 'tes_cold'
-    # sweep_values = [0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
+    elif sweep_param == 'tes_cold':
+        sweep_name   = 'tes_cold'
+        sweep_values = [0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
+    
+    else
+        raise ValueError("sweep_param incorrectly defined")
     
     
     # stretched lmp files
@@ -60,7 +71,7 @@ def run_1d_sensitivity():
 
         # design phase
         model_d = build_model(N_design, elec_design, eff_design, price_mults=current_prices)
-        solver.solve(model_d, tee=True)
+        solver.solve(model_d, tee=verbose)
 
 
         # extract sizing
@@ -86,7 +97,7 @@ def run_1d_sensitivity():
         model_disp.m_hot_tes_max.fix(hot_max)
         model_disp.m_cold_tes_max.fix(cold_max)
 
-        res_disp = solver.solve(model_disp, tee=False)
+        res_disp = solver.solve(model_disp, tee=verbose)
 
 
         if res_disp.solver.termination_condition == pyo.TerminationCondition.optimal:

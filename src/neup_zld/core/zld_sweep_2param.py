@@ -10,7 +10,7 @@ from core.zld_dynamic import build_model
 
 wd = sys.path[0]
 
-def run_2d_sensitivity():
+def run_2d_sensitivity(sweep_params: list, verbose=False):
 
     N_design   = 24
     N_dispatch = 8760
@@ -28,6 +28,8 @@ def run_2d_sensitivity():
     sweep_mode = "param_x_param"
 
     ########## parameter sweep ##########
+    if len(sweep_param) > 2 or len(sweep_param) < 2  or sweep_param is None
+        raise ValueError("Invalid number of entries for variable 'sweep_param': Must be equal to 2 for a 2-parameter sweep")
 
     sweep_name_1   = "lithium"
     sweep_values_1 = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
@@ -71,7 +73,7 @@ def run_2d_sensitivity():
                 current_prices = {sweep_name_1: val1, sweep_name_2: val2}
 
                 model_d = build_model(N_design, elec_design, eff_design, price_mults=current_prices)
-                res_d = solver.solve(model_d, tee=False)
+                res_d = solver.solve(model_d, tee=verbose)
 
                 if res_d.solver.termination_condition != pyo.TerminationCondition.optimal:
                     print(f"Design model failed for {sweep_name_1}={val1}, {sweep_name_2}={val2}")
@@ -95,7 +97,7 @@ def run_2d_sensitivity():
                 model_disp.m_hot_tes_max.fix(hot_max)
                 model_disp.m_cold_tes_max.fix(cold_max)
 
-                res_disp = solver.solve(model_disp, tee=False)
+                res_disp = solver.solve(model_disp, tee=verbose)
 
                 if res_disp.solver.termination_condition == pyo.TerminationCondition.optimal:
                     val1_str = str(val1).replace(".", "p")
@@ -143,7 +145,7 @@ def run_2d_sensitivity():
                 current_prices = {sweep_name_1: val1}
 
                 model_d = build_model(N_design, elec_design, eff_design, price_mults=current_prices)
-                res_d = solver.solve(model_d, tee=False)
+                res_d = solver.solve(model_d, tee=verbose)
 
                 if res_d.solver.termination_condition != pyo.TerminationCondition.optimal:
                     print(f"Design model failed for schedule={schedule_name}, {sweep_name_1}={val1}")
@@ -167,7 +169,7 @@ def run_2d_sensitivity():
                 model_disp.m_hot_tes_max.fix(hot_max)
                 model_disp.m_cold_tes_max.fix(cold_max)
 
-                res_disp = solver.solve(model_disp, tee=False)
+                res_disp = solver.solve(model_disp, tee=verbose)
 
                 if res_disp.solver.termination_condition == pyo.TerminationCondition.optimal:
                     val1_str = str(val1).replace(".", "p")
