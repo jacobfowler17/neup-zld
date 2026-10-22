@@ -5,7 +5,7 @@ from core.zld_sweep_2param import run_2d_sensitivity
 # from neup_zld.core.zld_sweep_3param import run_3d_sensitivity  # I don't think this code works right now, only has a function named "run_2d_sensitivity"
 
 
-def run_sweep(num_params: int, species: list = ["Li"], verbose: bool = False):
+def run_sweep(num_params: int, species: list = ["lithium"], verbose: bool = False):
 
     if num_params == 1:
         run_1d_sensitivity()

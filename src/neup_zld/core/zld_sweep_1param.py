@@ -26,7 +26,7 @@ def run_1d_sensitivity():
 
     # define sweep ranges
     # sweep lithium price multiplier
-    sweep_name     = 'Li'
+    sweep_name     = 'lithium'
     sweep_values   = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
     
     
