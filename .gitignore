@@ -1,10 +1,12 @@
 ## Custom file and folder ignores:
 .git
+uv.lock
+.vscode
 
 # Results folders
 dispatch_plots/
-
-
+src/neup_zld/sweeps
+src/neup_zld/results
 
 
 ## Python .gitignore template file defaults:
