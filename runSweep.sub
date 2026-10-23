@@ -5,18 +5,17 @@ container_image = docker://jfowler5/neup-zld:alpha-test
 universe = container
 
 executable = run.sh
-arguments  = $(NUM_PARAMS) $(SPECIES)
+arguments  = $(MODE) $(INPUTS) $(VERBOSE)
 
 transfer_input_files   = src/
-transfer_output_files  = neup_zld/results/sweep_$(NUM_PARAMS)var_$(SPECIES)
-transfer_output_remaps = "neup_zld/results/sweep_$(NUM_PARAMS)var_$(SPECIES) = home/jfowler5/neup-zld/results"
+transfer_output_files  = neup-zld/results/$(INPUTS)
 
-log    = logs/sweep_$(SPECIES)_$(NUM_PARAMS)var.log
-error  = errors/sweep_$(SPECIES)_$(NUM_PARAMS)var.err
-output = outputs/sweep_$(SPECIES)_$(NUM_PARAMS)var.out
+log    = logs/$(INPUTS).log
+error  = errors/$(INPUTS).err
+output = outputs/$(INPUTS).out
 
 request_cpus   = 10
-request_memory = 20GB
-request_disk   = 1.5GB
+request_memory = 40GB
+request_disk   = 2.0GB
 
-queue NUM_PARAMS SPECIES from arguments.txt
+queue MODE INPUTS VERBOSE from arguments.txt

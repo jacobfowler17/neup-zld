@@ -1,2 +1,2 @@
-1 lithium
-2 lithium water
+--case Li-cost-sweep -v
+--case Li-water-cost-sweep -v
