@@ -7,10 +7,11 @@ import csv
 import glob
 # from zld_model import build_model
 from core.zld_dynamic import build_model
+import helpers
 
 wd = sys.path[0]
 
-def run_2d_sensitivity(sweep_params: list, verbose=False):
+def run_2d_sensitivity(sweep_params: dict, verbose=False):
 
     N_design   = 24
     N_dispatch = 8760
@@ -28,14 +29,10 @@ def run_2d_sensitivity(sweep_params: list, verbose=False):
     sweep_mode = "param_x_param"
 
     ########## parameter sweep ##########
-    if len(sweep_param) > 2 or len(sweep_param) < 2  or sweep_param is None
+    if len(sweep_params) > 2 or len(sweep_params) < 2  or sweep_params is None:
         raise ValueError("Invalid number of entries for variable 'sweep_param': Must be equal to 2 for a 2-parameter sweep")
-
-    sweep_name_1   = "lithium"
-    sweep_values_1 = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
-
-    sweep_name_2   = "water"
-    sweep_values_2 = [0.25, 0.5, 1.0, 1.5, 2.0, 5.0]
+    
+    [sweep_name_1, sweep_name_2], [sweep_values_1, sweep_values_2] = helpers.unpack_sweep_params(sweep_params)
     
     ########## pricing schedule files ##########
 

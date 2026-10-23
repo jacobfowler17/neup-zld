@@ -6,10 +6,11 @@ import sys
 import csv
 import glob
 from core.zld_dynamic import build_model
+import helpers
 
 wd = sys.path[0]
 
-def run_1d_sensitivity(sweep_param, verbose):
+def run_1d_sensitivity(sweep_params, verbose):
     
     N_design    = 24
     N_dispatch  = 8760
@@ -25,31 +26,10 @@ def run_1d_sensitivity(sweep_param, verbose):
 
 
     # define sweep ranges
-    if len(sweep_param) > 1 or len(sweep_param) == 0 or sweep_param is None
+    if len(sweep_params) > 1 or len(sweep_params) == 0 or sweep_params is None:
         raise ValueError("Invalid number of entries for variable 'sweep_param': Must be equal to 1 for a 1-parameter sweep")
 
-    # NOTE: I should instead just make it so I either:
-    #     1. Enter a "case" number that loads a standard set of arguments from a cases.json file
-    #     2. Enter the sweep_param and sweep_values as a keyword/value pair and pass 'sweep_params' as a dictionary
-
-    # sweep lithium price multiplier
-    elif sweep_param == 'lithium':
-        sweep_name     = 'lithium'
-        sweep_values   = [0.25, 0.5, 1.0, 2.5, 5.0, 7.5, 10.0, 20.0]
-    
-    # sweep water price multiplier
-    elif sweep_param == 'water':
-        sweep_name   = 'water'
-        sweep_values = [0.25, 0.5, 1.0, 1.5, 2.0, 5.0]
-    
-    # sweep cold tes cost multiplier
-    elif sweep_param == 'tes_cold':
-        sweep_name   = 'tes_cold'
-        sweep_values = [0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
-    
-    else
-        raise ValueError("sweep_param incorrectly defined")
-    
+    [sweep_name], [sweep_values] = helpers.unpack_sweep_params(sweep_params)
     
     # stretched lmp files
     price_schedule_files = sorted(
